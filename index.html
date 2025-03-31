@@ -64,6 +64,10 @@
   }
 }
 
+.loading, .error-message, .sent-message {
+    display: none;
+}
+
   </style>
 
 </head>
@@ -499,19 +503,15 @@
                     <div class="col-12">
                       <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
                     </div><br><br>
-
                     <div class="col-12 ">
                       <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
                     </div><br><br>
-
                     <div class="col-12">
                       <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
                     </div><br><br>
-
                     <div class="col-12">
                       <textarea class="form-control" name="message" rows="4" placeholder="Message" required=""></textarea>
                     </div><br><br>
-
                     <div class="col-12 text-center">
                       <div class="loading">Loading</div>
                       <div class="error-message"></div>
@@ -552,6 +552,37 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.querySelector("form[name='contact']");
+      const loadingMessage = document.querySelector(".loading");
+      const errorMessage = document.querySelector(".error-message");
+      const sentMessage = document.querySelector(".sent-message");
+  
+      // Hide messages initially
+      loadingMessage.style.display = "none";
+      errorMessage.style.display = "none";
+      sentMessage.style.display = "none";
+  
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+  
+        // Show loading message
+        loadingMessage.style.display = "block";
+  
+        // Simulate a delay (e.g., sending data to a server)
+        setTimeout(function () {
+          loadingMessage.style.display = "none"; // Hide loading
+          sentMessage.style.display = "block"; // Show success message
+          // Optional: Reset the form
+        form.reset();
+      }, 2000); // Simulate a 2-second delay
+    });
+  });
+</script>
+
+  
+  
 
 </body>
 
